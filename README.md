@@ -1,7 +1,7 @@
 # shiro-study
 
 #### 项目介绍
-用来学习shiro的demo（springboot、shiro、mybatis-plus），非常简洁，不带其它不相关的框架。
+用来学习shiro的demo（springboot、shiro、mybatis-plus、redis），非常简洁，不带其它无关的框架，代码拥有详细注释。
 
 #### 开发环境
 

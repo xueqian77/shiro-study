@@ -15,17 +15,24 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+/**
+ * 认证类，登录会触发doGetAuthenticationInfo，鉴权会触发doGetAuthorizationInfo。
+ */
 public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     private LoginService loginService;
 
+    @Override
+    public String getName() {
+        return "CustomRealm";
+    }
+
     /**
-     * @MethodName doGetAuthorizationInfo
-     * @Description 权限配置类
+     *  获取权限和角色。
      * @Param [principalCollection]
      * @Return AuthorizationInfo
-     * @Author WangShiLin
+     * @Author tangjia
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -47,11 +54,10 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
     /**
-     * @MethodName doGetAuthenticationInfo
-     * @Description 认证配置类
+     *  验证登录。
      * @Param [authenticationToken]
      * @Return AuthenticationInfo
-     * @Author WangShiLin
+     * @Author tangjia
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
