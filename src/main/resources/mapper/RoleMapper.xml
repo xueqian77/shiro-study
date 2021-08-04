@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.x.study.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="cn.x.study.entity.Role">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <collection property="permissionsSet" ofType="cn.x.study.entity.Permissions" column="roleId">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="permissions_name" jdbcType="VARCHAR" property="permissionsName"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `id`
+        , `role_name`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="cn.x.study.entity.Role" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from role
+        where `id` = #{id,jdbcType=BIGINT}
+    </select>
+
+</mapper>

@@ -12,14 +12,16 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
 public class LoginController {
 
-    @GetMapping("/login")
-    public String login(User user) {
+    @PostMapping("/login")
+    public String login(@RequestBody User user) {
         if (StringUtils.isEmpty(user.getUserName()) || StringUtils.isEmpty(user.getPassword())) {
             return "请输入用户名和密码！";
         }

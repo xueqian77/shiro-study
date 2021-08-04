@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.x.study.mapper.PermissionsMapper">
+    <resultMap id="BaseResultMap" type="cn.x.study.entity.Permissions">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="permissions_name" jdbcType="VARCHAR" property="permissionsName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `id`
+        , `permissions_name`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="cn.x.study.entity.Permissions" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from permissions
+        where `id` = #{id,jdbcType=BIGINT}
+    </select>
+
+</mapper>

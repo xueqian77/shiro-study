@@ -35,11 +35,11 @@ public class CustomRealm extends AuthorizingRealm {
         User user = loginService.getUserByName(name);
         //添加角色和权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        for (Role role : user.getRoles()) {
+        for (Role role : user.getRoleSet()) {
             //添加角色
             simpleAuthorizationInfo.addRole(role.getRoleName());
             //添加权限
-            for (Permissions permissions : role.getPermissions()) {
+            for (Permissions permissions : role.getPermissionsSet()) {
                 simpleAuthorizationInfo.addStringPermission(permissions.getPermissionsName());
             }
         }

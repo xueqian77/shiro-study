@@ -15,18 +15,18 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    //将自己的验证方式加入容器
+    @Bean
+    public CustomRealm myShiroRealm() {
+        return new CustomRealm();
+    }
+
     @Bean
     @ConditionalOnMissingBean
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
         defaultAAP.setProxyTargetClass(true);
         return defaultAAP;
-    }
-
-    //将自己的验证方式加入容器
-    @Bean
-    public CustomRealm myShiroRealm() {
-        return new CustomRealm();
     }
 
     //权限管理，配置主要是Realm的管理认证

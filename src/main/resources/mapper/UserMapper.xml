@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.x.study.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="cn.x.study.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+
+    <resultMap id="UserDetailResultMap" type="cn.x.study.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <collection property="roleSet" ofType="cn.x.study.entity.Role"  >
+            <id column="role_id" jdbcType="BIGINT" property="id"/>
+            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+            <collection property="permissionsSet" ofType="cn.x.study.entity.Permissions"  >
+                <id column="permissions_id" jdbcType="BIGINT" property="id"/>
+                <result column="permissions_name" jdbcType="VARCHAR" property="permissionsName"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        `id`,`user_name`, `password`
+    </sql>
+
+    <select id="selectUser" parameterType="cn.x.study.entity.User" resultMap="UserDetailResultMap">
+        SELECT
+            user.*,
+            role.id as role_id,
+            role.role_name as role_name,
+            permissions.id as permissions_id,
+            permissions.permissions_name as permissions_name
+        FROM
+            user
+                LEFT JOIN user_role ON user.id = user_role.user_id
+                LEFT JOIN role ON user_role.role_id = role.id
+                LEFT JOIN role_permissions ON role.id = role_permissions.role_id
+                LEFT JOIN permissions ON role_permissions.permissions_id = permissions.id
+        where user.user_name = #{userName}
+    </select>
+
+</mapper>
