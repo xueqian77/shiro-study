@@ -12,6 +12,7 @@
 | IDE   | IntelliJ IDEA 2021.1 |
 | Maven | 3.5.4                |
 | MySQL | 5.7.18                |
+| Redis | 5.0.7                |
 
 
 #### 数据库模型
